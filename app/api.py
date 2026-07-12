@@ -1,8 +1,12 @@
-"""API Module"""
-
 import os
-from flask import Flask, json
+import werkzeug.urls
+if not hasattr(werkzeug.urls, 'url_quote'):
+    from werkzeug.utils import url_quote
+    werkzeug.urls.url_quote = url_quote
+
+from flask import Flask, json, request
 from cifraclub import CifraClub
+from chords import keyboard_svg
 
 app = Flask(__name__)
 
@@ -24,6 +28,15 @@ def get_cifra(artist, song):
         status=200,
         mimetype='application/json'
     )
+
+@app.route('/chords/diagram.svg')
+def chord_diagram():
+    name = request.args.get('name', '')
+    try:
+        svg = keyboard_svg(name)
+    except (KeyError, TypeError, ValueError):
+        return app.response_class('unsupported chord', status=400, mimetype='text/plain')
+    return app.response_class(svg, status=200, mimetype='image/svg+xml')
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=os.getenv('PORT', '3000'), debug=True)

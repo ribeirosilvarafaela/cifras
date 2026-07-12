@@ -4,6 +4,7 @@ from bs4 import BeautifulSoup
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
+from chords import extract_chords, remove_tabs
 
 CIFRACLUB_URL = "https://www.cifraclub.com.br/"
 
@@ -22,10 +23,15 @@ class CifraClub():
             self.driver.get(url)
             self.get_details(result)
             self.get_cifra(result)
-            self.driver.quit()
         except: # pylint: disable=bare-except
             # NoSuchElementException
             result['error'] = "error description"
+        finally:
+            self.driver.quit()
+
+        if 'cifra' in result:
+            result['cifra'] = remove_tabs(result['cifra'])
+            result['chords'], result['chord_warnings'] = extract_chords(result['cifra'])
 
         return result
 

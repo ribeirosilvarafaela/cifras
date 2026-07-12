@@ -1,3 +1,5 @@
-Flask==2.2.2
 beautifulsoup4==4.11.1
 selenium==4.6.0
+Flask==2.0.3
+Werkzeug==2.0.3
+pychord==1.2.2
