@@ -10,6 +10,30 @@ ou criar automações.
 O endpoint de API `/artists/:artist/songs/:song` executa um WebDriver do Selenium
 para ler a página web e extrair a cifra e meta dados da música, no formato de JSON.
 
+## Implementações atuais
+
+Além dos metadados e do campo `cifra`, a API também remove blocos de tablatura,
+identifica acordes únicos, calcula suas notas, gera diagramas SVG de teclado e
+retorna avisos para acordes não suportados sem interromper a resposta.
+
+O campo `cifra` continua sendo uma lista de linhas. Os acordes ficam no campo
+`chords`, com a grafia original preservada:
+
+```json
+{
+  "chords": [{
+    "name": "C#m7",
+    "notes": ["C#", "E", "G#", "B"],
+    "diagram": "/chords/diagram.svg?name=C%23m7"
+  }],
+  "chord_warnings": []
+}
+```
+
+Diagramas também podem ser obtidos diretamente em
+`/chords/diagram.svg?name=C%23m7`. A interpretação usa `pychord`; por exemplo,
+`E7M` e `E7M(9)` são normalizados apenas internamente e mantêm o nome original.
+
 # Como rodar o projeto no seu computador?
 
 Para executar o projeto na sua máquina local, certifique-se
@@ -29,6 +53,15 @@ Para os geeks que usam Makefile, basta executar:
 ```console
 make up
 ```
+
+Para validar o parser sem Selenium:
+
+```console
+cd app
+python -m pytest -q -p no:cacheprovider test_chords.py
+```
+
+Ou, usando Docker, execute `make test`.
 
 # Como pegar uma cifra?
 
