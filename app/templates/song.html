@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{ song.artist }} - {{ song.name }}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <main class="container">
+    <a href="{{ url_for('home') }}">Nova pesquisa</a>
+    <h1>{{ song.artist }} - {{ song.name }}</h1>
+    {% if song.warnings %}<div class="notice">{{ song.warnings|join(', ') }}</div>{% endif %}
+    <p><a href="{{ song.youtube_url }}">YouTube</a> · <a href="{{ song.cifraclub_url }}">Cifra Club</a></p>
+    <form action="/artists/{{ song.artist }}/songs/{{ song.name }}" method="get"><input type="hidden" name="refresh" value="true"><button type="submit">Atualizar música</button></form>
+    {% if song.chord_warnings %}<div class="notice">{% for warning in song.chord_warnings %}{{ warning.name }}: {{ warning.reason }}{% if not loop.last %}<br>{% endif %}{% endfor %}</div>{% endif %}
+    <section><h2>Acordes</h2><div class="chord-grid">{% for chord in song.chords %}<article class="chord"><h3>{{ chord.name }}</h3><p>{{ chord.notes|join(', ') }}</p><img src="{{ chord.diagram }}" alt="Teclado do acorde {{ chord.name }}"></article>{% else %}<p>Nenhum acorde identificado.</p>{% endfor %}</div></section>
+    <section><h2>Cifra</h2><pre class="cifra">{{ song.cifra|join('\n') }}</pre></section>
+  </main>
+</body>
+</html>

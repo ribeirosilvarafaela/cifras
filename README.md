@@ -37,6 +37,11 @@ Diagramas também podem ser obtidos diretamente em
 `/chords/diagram.svg?name=C%23m7`. A interpretação usa `pychord`; por exemplo,
 `E7M` e `E7M(9)` são normalizados apenas internamente e mantêm o nome original.
 
+As músicas pesquisadas são salvas em SQLite em `/data/cifraclub.db`. Consultas
+repetidas reutilizam o registro salvo; para forçar novo scraping, use
+`?refresh=true` na rota da música. O frontend está disponível em `/`, `/songs` e
+`/songs/{id}`.
+
 # Como rodar o projeto no seu computador?
 
 Para executar o projeto na sua máquina local, certifique-se

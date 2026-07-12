@@ -1,0 +1,13 @@
+:root { color-scheme: light; font-family: system-ui, sans-serif; }
+body { margin: 0; background: #f5f1e8; color: #222; }
+.container { max-width: 960px; margin: 0 auto; padding: 2rem 1rem; }
+.search-form { display: flex; gap: 1rem; flex-wrap: wrap; align-items: end; }
+label { display: grid; gap: .35rem; } input { padding: .55rem; border: 1px solid #aaa; border-radius: .25rem; }
+button { padding: .6rem .9rem; border: 0; border-radius: .25rem; background: #16425b; color: white; cursor: pointer; }
+.section-heading { display: flex; justify-content: space-between; align-items: center; margin-top: 2rem; }
+.song-list { padding-left: 1.2rem; line-height: 1.9; }
+.notice { margin: 1rem 0; padding: .8rem; background: #fff0c2; border-left: 4px solid #d18b00; }
+.chord-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; }
+.chord { padding: 1rem; background: white; border: 1px solid #ddd; border-radius: .4rem; }
+.chord img { width: 100%; height: auto; }
+.cifra { overflow-x: auto; padding: 1rem; background: #1d2528; color: #f6f0d5; line-height: 1.45; }

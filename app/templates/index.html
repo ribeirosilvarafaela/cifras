@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Cifra Club API</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <main class="container">
+    <h1>Pesquisar cifra</h1>
+    <form class="search-form" action="/artists/" method="get" id="search-form">
+      <label>Artista <input name="artist" required></label>
+      <label>Música <input name="song" required></label>
+      <button type="submit">Pesquisar</button>
+    </form>
+    <section>
+      <div class="section-heading"><h2>Músicas recentes</h2><a href="{{ url_for('songs_page') }}">Ver todas</a></div>
+      {% if songs %}
+      <ul class="song-list">{% for song in songs %}<li><a href="{{ url_for('saved_song_page', song_id=song.id) }}">{{ song.artist }} - {{ song.name }}</a></li>{% endfor %}</ul>
+      {% else %}<p>Nenhuma música pesquisada ainda.</p>{% endif %}
+    </section>
+  </main>
+  <script src="{{ url_for('static', filename='app.js') }}"></script>
+</body>
+</html>

@@ -6,6 +6,7 @@ services:
     restart: on-failure
     volumes: 
       - ./app:/app
+      - ./data:/data
     ports: 
       - 3000:3000
     environment: 

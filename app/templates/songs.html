@@ -1,0 +1,17 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Músicas salvas</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <main class="container">
+    <a href="{{ url_for('home') }}">Nova pesquisa</a>
+    <h1>Músicas salvas</h1>
+    {% if songs %}<ul class="song-list">{% for song in songs %}<li><a href="{{ url_for('saved_song_page', song_id=song.id) }}">{{ song.artist }} - {{ song.name }}</a></li>{% endfor %}</ul>
+    {% else %}<p>Nenhuma música salva.</p>{% endif %}
+  </main>
+</body>
+</html>
