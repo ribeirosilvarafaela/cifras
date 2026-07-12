@@ -10,6 +10,9 @@ ou criar automações.
 O endpoint de API `/artists/:artist/songs/:song` executa um WebDriver do Selenium
 para ler a página web e extrair a cifra e meta dados da música, no formato de JSON.
 
+Consulte o [desenho da arquitetura atual](ARCHITECTURE.md) para ver os serviços,
+componentes e fluxos principais.
+
 ## Implementações atuais
 
 Além dos metadados e do campo `cifra`, a API também remove blocos de tablatura,
